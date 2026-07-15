@@ -1,28 +1,53 @@
 # Linux Server Hardening Lab
 
-This project demonstrates basic Linux server hardening techniques in a virtual lab environment.
+A controlled virtual laboratory demonstrating baseline Linux server security and remote administration using OpenSSH, UFW and Fail2Ban.
 
-## Setup
+## Environment
 
-- Ubuntu Server VM
-- Kali Linux VM
-- VirtualBox
-- Internal isolated network
+- Ubuntu Server virtual machine: `192.168.56.11`
+- Kali Linux virtual machine used as the remote administration client
+- Oracle VirtualBox internal network
 
-## Security Measures
+## Activities Completed
 
-- SSH Server Configuration
-- UFW Firewall
-- Fail2Ban Protection
+1. Installed OpenSSH Server on Ubuntu Server.
+2. Established and verified a remote SSH session from Kali Linux.
+3. Installed and enabled UFW.
+4. Allowed SSH traffic on port `22/tcp` for IPv4 and IPv6.
+5. Installed Fail2Ban and verified that the service was active.
+6. Checked Fail2Ban status and confirmed one active jail: `sshd`.
 
-## Activities
+## Evidence
 
-- Remote SSH access
-- Firewall rule configuration
-- Intrusion prevention setup
-- Linux service management
+### Verified Remote SSH Access
 
-## Tools Used
+![Successful SSH login from Kali Linux to Ubuntu Server](4.png)
+
+### Active UFW Rules
+
+![UFW enabled with SSH rules for IPv4 and IPv6](5.png)
+
+### Active Fail2Ban Service and sshd Jail
+
+![Fail2Ban active with sshd jail](7.png)
+
+## Commands Used
+
+```bash
+ip a
+sudo apt install openssh-server
+sudo systemctl status ssh
+ssh vboxuser@192.168.56.11
+sudo apt install ufw -y
+sudo ufw allow ssh
+sudo ufw enable
+sudo ufw status
+sudo apt install fail2ban -y
+sudo systemctl status fail2ban
+sudo fail2ban-client status
+```
+
+## Tools and Technologies
 
 - Ubuntu Server
 - Kali Linux
@@ -30,19 +55,18 @@ This project demonstrates basic Linux server hardening techniques in a virtual l
 - UFW
 - Fail2Ban
 - VirtualBox
+- Linux command line
 
 ## Skills Demonstrated
 
-- Linux Administration
-- Server Hardening
-- Network Security
-- Firewall Configuration
-- Remote Access Management
-- Security Monitoring
+- Remote Linux administration
+- Package installation
+- Service inspection
+- Firewall configuration
+- Basic intrusion-prevention setup
+- Security verification
+- Technical documentation
 
-## What I Learned
+## Scope
 
-- Secure remote administration using SSH
-- Basic firewall management with UFW
-- Intrusion prevention using Fail2Ban
-- Linux service administration
+This project demonstrates baseline security controls in a learning environment. It is not presented as a complete production hardening standard, penetration test or proof of resistance against every attack.
